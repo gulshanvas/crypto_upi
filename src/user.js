@@ -73,6 +73,35 @@ async function GetWalletByMobile(receiverMobileNumber) {
 
 }
 
+async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSessionId) {
+
+  if (otp !== DEFAULT_OTP) {
+    return { message: "invalid OTP", code: 400 }
+  }
+
+  var config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: `https://2factor.in/API/V1/${SMS_API_KEY}/SMS/VERIFY/${smsSessionId}/${otp}`,
+    headers: {}
+  };
+
+  // {"Status":"Success","Details":"OTP Matched"}
+  const response = await axios(config)
+  console.log("response ", response)
+  if (response.Status !== SUCCESS) {
+    return {
+      code: 400,
+      message: "invalid otp"
+    }
+  }
+
+
+  await CreateUser(mobileNo, publicKey, encryptedJSON)
+
+  return { message: "user registered", code: 200 }
+}
+
 
 module.exports = {
   GetUserByMobile,

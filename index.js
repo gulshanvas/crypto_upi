@@ -65,6 +65,34 @@ app.get('/mobile', async (req, res) => {
 
 })
 
+app.post('/register/', async (req, res) => {
+
+  console.log("mobile number ===> ", req.query.mobile_no);
+  console.log("encrypted json ===> ", req.query.pk_json);
+  console.log("public key ===> ", req.query.public_key);
+  console.log("otp ===> ", req.query.otp)
+  // const otp = req.otp
+  const mobileNumber = req.query.mobile_no;
+  const pkJSON = req.query.pk_json;
+  const publicKey = req.query.public_key;
+  const otp = req.query.otp;
+  const sessionId = req.query.session_id;
+
+  try {
+    const newUser = await CreateNewUser(mobileNumber, publicKey, pkJSON, otp, sessionId)
+    if (newUser.code == 400) {
+      return res.status(res.code).json({ success: false, message: res.message })
+    }
+
+    res.json({ success: true, message: "new user created" })
+  }
+  catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+
+})
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
