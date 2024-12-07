@@ -114,7 +114,7 @@ app.post('/login', async (req, res) => {
 
   const response = await Login(mobileNo, otp, sessionId)
 
-  res.status(response.status).json({ success: true, data: response.data })
+  res.status(response.code).json({ success: true, data: response.data })
 
 })
 

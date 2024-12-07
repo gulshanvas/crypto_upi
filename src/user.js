@@ -176,6 +176,8 @@ async function Login(mobileNo, otp, smsSessionId) {
   // temporary session id
   const sessionId = uuidv4()
 
+  console.log('generated session id ', sessionId)
+
   await UpdateSessionId(mobileNo, sessionId)
 
   return {
