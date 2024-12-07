@@ -130,7 +130,7 @@ console.log('to ',to);
 
   let transferResponse;
   try {
-    transferResponse = await TransferRequest(authorizationList, encodedData, to);
+    transferResponse = await TransferRequest(JSON.parse(authorizationList), encodedData, to);
 
     res.json({ success: true, message: "successfully transferred", data: transferResponse.receipt });
 
