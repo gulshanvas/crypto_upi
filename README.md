@@ -1,2 +1,2 @@
-# crypto_upi
-Abstraction over public addresses using phone numbers
+# crypto upi
+Abstraction over public addresses using phone numbers for payments
