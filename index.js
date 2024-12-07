@@ -93,6 +93,21 @@ app.post('/register/', async (req, res) => {
 
 })
 
+app.post('/generate-otp', async (req, res) => {
+
+  const mobileNumber = req.query.mobile_no;
+
+  if (!mobileNumber) {
+    return res.json({ success: false, message: "enter mobile number" });
+  }
+
+  const response = await SendOTP(mobileNumber)
+
+  res.status(res.code).json({ success: true, data: response.data })
+
+})
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

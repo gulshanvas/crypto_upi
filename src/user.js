@@ -102,9 +102,31 @@ async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSession
   return { message: "user registered", code: 200 }
 }
 
+async function SendOTP(mobileNumber) {
+
+  // const API_KEY = "21df2827-b473-11ef-8b17-0200cd936042"
+
+  var config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: `https://2factor.in/API/V1/${SMS_API_KEY}/SMS/${mobileNumber}/AUTOGEN/OTP1`,
+    headers: {}
+  };
+
+  const response = await axios(config)
+
+  console.log('response in send otp ', response.data)
+
+  return {
+    code: 200,
+    data: response.data
+  }
+
+}
 
 module.exports = {
   GetUserByMobile,
   CreateNewUser,
+  SendOTP,
   GetWalletByMobile
 }
