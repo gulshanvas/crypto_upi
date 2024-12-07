@@ -103,7 +103,7 @@ app.post('/generate-otp', async (req, res) => {
 
   const response = await SendOTP(mobileNumber)
 
-  res.status(res.code).json({ success: true, data: response.data })
+  res.status(response.code).json({ success: true, data: response.data })
 
 })
 
