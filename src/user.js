@@ -191,6 +191,32 @@ async function Login(mobileNo, otp, smsSessionId) {
 
 }
 
+async function GetWalletByMobile(receiverMobileNumber) {
+
+  const receiver = await GetUser(receiverMobileNumber)
+
+  console.log("done calling GetWalletByMobile")
+
+  console.log('receiver ', receiver)
+
+  if (!receiver || !receiver.id) {
+    return {
+      code: 200,
+      data: ""
+    }
+  }
+
+  return {
+    data: {
+      id: receiver.id,
+      phoneNo: receiver.phone_no,
+      publicKey: receiver.public_key,
+    },
+    code: 200
+  }
+
+}
+
 module.exports = {
   GetUserByMobile,
   CreateNewUser,
