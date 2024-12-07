@@ -120,8 +120,8 @@ app.post('/login', async (req, res) => {
 
 app.post('/transfer', async (req, res) => {
 
-  const authorizationList = req.query.authorizationList;
-  const encodedData = req.query.encodedData;
+  const authorizationList = req.query.authorization_list;
+  const encodedData = req.query.encoded_data;
   const to = req.query.to;
 
 
