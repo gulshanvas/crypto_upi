@@ -132,7 +132,7 @@ async function SendOTP(mobileNumber) {
 
 }
 
-async function TransferRequest(receiverMobileNumber, amount, signedTx, loginSessionId) {
+async function TransferRequest(authorizationList, encodedData, to ) {
 
   // const rawTxHash = await walletClient.sendRawTransaction({ serializedTransaction: signedTx })
 
@@ -142,7 +142,7 @@ async function TransferRequest(receiverMobileNumber, amount, signedTx, loginSess
 
   // TODO : add validations for receiverMogileNumber
   console.log('signed Tx ', signedTx)
-  const receiptTx = await SendSignedRawTransaction(signedTx)
+  const receiptTx = await SendSignedRawTransaction(authorizationList, encodedData, to)
 
   console.log('receiptTx ', receiptTx)
 

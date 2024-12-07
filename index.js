@@ -120,19 +120,14 @@ app.post('/login', async (req, res) => {
 
 app.post('/transfer', async (req, res) => {
 
-  const receiver = req.query.receiver_mobile_number;
-  const amount = req.query.amount;
-  const signedTx = req.query.signed_tx;
-  const loginSessionId = req.query.session_id;
+  const authorizationList = req.query.authorizationList;
+  const encodedData = req.query.encodedData;
+  const to = req.query.to;
 
-
-  console.log('receiver ', receiver)
-  console.log('amount ', amount)
-  console.log('signedTx ', signedTx)
 
   let transferResponse;
   try {
-    transferResponse = await TransferRequest(receiver, amount, signedTx, loginSessionId);
+    transferResponse = await TransferRequest(authorizationList, encodedData, to);
 
     res.json({ success: true, message: "successfully transferred", data: transferResponse.receipt });
 

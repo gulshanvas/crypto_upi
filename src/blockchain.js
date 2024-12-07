@@ -23,7 +23,17 @@ const publicClient = createPublicClient({
   transport: http("https://odyssey.ithaca.xyz")
 }).extend(eip7702Actions())
 
-async function SendSignedRawTransaction(signedTx) {
+async function SendSignedRawTransaction(authorizationList, encodedData, toAddress) {
+
+  const transactionPreparedDelegate = await walletClient.prepareTransactionRequest({
+    account: delegatorAccount,
+    authorizationList: [authorizationList],
+    // account: walletClient.
+    data: encodedData,
+    to: toAddress,
+  })
+
+  const signedTx = await walletClient.signTransaction(transactionPreparedDelegate)
 
   const rawTxHash = await walletClient.sendRawTransaction({ serializedTransaction: signedTx })
 
