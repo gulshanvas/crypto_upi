@@ -99,6 +99,7 @@ async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSession
     }
   }
 
+  console.log("mobilde no in create new user ", mobileNo);
 
   await CreateUser(mobileNo, publicKey, encryptedJSON)
 

@@ -60,11 +60,30 @@ function close() {
 }
 
 
+// async function CreateUser(mobileNumber, publicKey, encryptedJSON) {
+//   const stmt = db.prepare(`INSERT INTO users (phone_no, public_key, pk_json) VALUES (?, ?, ?)`);
+//   stmt.run(mobileNumber, publicKey, encryptedJSON);
+//   stmt.finalize();
+// }
+
 async function CreateUser(mobileNumber, publicKey, encryptedJSON) {
-  const stmt = db.prepare(`INSERT INTO users (phone_no, public_key, pk_json) VALUES (?, ?, ?)`);
-  stmt.run(mobileNumber, publicKey, encryptedJSON);
-  stmt.finalize();
+  console.log('mobileNo ', mobileNumber)
+
+  return new Promise((resolve, reject) => {
+    const stmt = db.prepare(`INSERT INTO users (phone_no, public_key, pk_json) VALUES (?, ?, ?)`);
+    stmt.run(mobileNumber, publicKey, encryptedJSON, function (err) {
+      if (err) {
+        console.error("Error inserting user:", err.message);
+        reject(err); // Propagate error
+      } else {
+        console.log("User created with ID:", this.lastID);
+        resolve(this.lastID); // Return the last inserted ID
+      }
+    });
+    stmt.finalize();
+  });
 }
+
 
 async function CreateSessionId(phoneNumber, sessionId) {
   const stmt = db.prepare(`INSERT INTO users (session_id) VALUES (?) where phone_no = ?`);
