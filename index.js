@@ -118,6 +118,31 @@ app.post('/login', async (req, res) => {
 
 })
 
+app.post('/transfer', async (req, res) => {
+
+  const receiver = req.query.receiver_mobile_number;
+  const amount = req.query.amount;
+  const signedTx = req.query.signed_tx;
+  const loginSessionId = req.query.session_id;
+
+
+  console.log('receiver ', receiver)
+  console.log('amount ', amount)
+  console.log('signedTx ', signedTx)
+
+  let transferResponse;
+  try {
+    transferResponse = await TransferRequest(receiver, amount, signedTx);
+
+    res.json({ success: true, message: "successfully transferred", data: transferResponse.receipt });
+
+  } catch (error) {
+    console.error("error transferring funds ", error);
+    res.status(400).json({ success: false, message: "failed to transfer" })
+  }
+
+})
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -4,6 +4,7 @@ const { GetUser, CreateUser, UpdateSessionId } = require("../db/db");
 const SMS_API_KEY = process.env.SMS_API_KEY;
 
 var axios = require('axios');
+const { SendSignedRawTransaction } = require("./blockchain");
 
 async function GetUserByMobile(mobileNo) {
   console.log('in GetUserByMobile')
@@ -125,6 +126,28 @@ async function SendOTP(mobileNumber) {
   return {
     code: 200,
     data: response.data
+  }
+
+}
+
+async function TransferRequest(receiverMobileNumber, amount, signedTx) {
+
+  // const rawTxHash = await walletClient.sendRawTransaction({ serializedTransaction: signedTx })
+
+  // console.log("receipt raw tx hash ", await publicClient.getTransactionReceipt({ hash: rawTxHash }))
+
+  // const receiptTx = await walletClient.waitForTransactionReceipt({ hash: rawTxHash })
+
+  // TODO : add validations for receiverMogileNumber
+  console.log('signed Tx ', signedTx)
+  const receiptTx = await SendSignedRawTransaction(signedTx)
+
+  console.log('receiptTx ', receiptTx)
+
+
+  return {
+    receipt: receiptTx,
+    code: 200
   }
 
 }
