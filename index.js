@@ -36,7 +36,7 @@ app.get('/mobile/:mobile_no', async (req, res) => {
     const user = await GetUserByMobile(mobileNumber);
 
     if (!user) {
-      return res.status(400).json({ success: false, message: "not present" });
+      return res.status(200).json({ success: false, message: "not present" });
     }
 
     res.json({ success: true, data: user });
