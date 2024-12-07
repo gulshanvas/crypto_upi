@@ -46,8 +46,8 @@ app.get('/mobile/:mobile_no', async (req, res) => {
   }
 });
 
-app.get('/mobile', async (req, res) => {
-  const receiverMobileNumber = req.query.receiver_mobile_number;
+app.get('/receiver-mobile/:receiver_mobile_number', async (req, res) => {
+  const receiverMobileNumber = req.params.receiver_mobile_number;
 
   if (!receiverMobileNumber) {
     res.status(400).json({ success: false, message: "receiver mobile number is required" })
