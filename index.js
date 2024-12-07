@@ -79,9 +79,9 @@ app.post('/register/', async (req, res) => {
   const smsSessionId = req.query.sms_session_id;
 
   try {
-    const newUser = await CreateNewUser(mobileNumber, publicKey, pkJSON, otp, smsSessionId)
-    if (newUser.code == 400) {
-      return res.status(res.code).json({ success: false, message: res.message })
+    const newUserResponse = await CreateNewUser(mobileNumber, publicKey, pkJSON, otp, smsSessionId)
+    if (newUserResponse.code == 400) {
+      return res.status(newUserResponse.code).json({ success: false, message: res.message })
     }
 
     res.json({ success: true, message: "new user created" })
