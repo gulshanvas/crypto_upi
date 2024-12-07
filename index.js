@@ -46,6 +46,25 @@ app.get('/mobile/:mobile_no', async (req, res) => {
   }
 });
 
+app.get('/mobile', async (req, res) => {
+  const receiverMobileNumber = req.query.receiver_mobile_number;
+
+  if (!receiverMobileNumber) {
+    res.status(400).json({ success: false, message: "receiver mobile number is required" })
+    return
+  }
+
+  const response = await GetWalletByMobile(receiverMobileNumber);
+
+  if (response.code == 400) {
+    res.status(res.code).json({ success: false, message: "unable to fetch by receiver mobile number" })
+    return
+  }
+
+  res.json({ success: true, data: response.data })
+
+})
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
