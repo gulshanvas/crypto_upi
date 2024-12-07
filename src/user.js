@@ -141,7 +141,7 @@ async function TransferRequest(authorizationList, encodedData, to ) {
   // const receiptTx = await walletClient.waitForTransactionReceipt({ hash: rawTxHash })
 
   // TODO : add validations for receiverMogileNumber
-  console.log('signed Tx ', signedTx)
+  // console.log('signed Tx ', signedTx)
   const receiptTx = await SendSignedRawTransaction(authorizationList, encodedData, to)
 
   console.log('receiptTx ', receiptTx)
