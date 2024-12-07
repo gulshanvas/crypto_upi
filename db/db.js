@@ -92,9 +92,22 @@ async function CreateSessionId(phoneNumber, sessionId) {
 }
 
 async function UpdateSessionId(phoneNumber, sessionId) {
-  const stmt = db.prepare(`INSERT INTO users (session_id) VALUES (?) where phone_no = ?`);
-  stmt.run(sessionId, phoneNumber);
-  stmt.finalize();
+  return new Promise((resolve, reject) => {
+    const stmt = db.prepare(`UPDATE users SET session_id = ? WHERE phone_no = ?`);
+    stmt.run(sessionId, phoneNumber, function (err) {
+      if (err) {
+        console.error("Error updating session ID:", err.message);
+        reject(err); // Propagate error
+      } else if (this.changes === 0) {
+        console.log("No rows updated. Phone number not found.");
+        reject(new Error("Phone number not found."));
+      } else {
+        console.log("Session ID updated successfully.");
+        resolve();
+      }
+    });
+    stmt.finalize();
+  });
 }
 
 
