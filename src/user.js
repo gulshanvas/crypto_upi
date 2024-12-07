@@ -75,9 +75,9 @@ async function GetWalletByMobile(receiverMobileNumber) {
 
 async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSessionId) {
 
-  if (otp !== DEFAULT_OTP) {
-    return { message: "invalid OTP", code: 400 }
-  }
+  // if (otp !== DEFAULT_OTP) {
+  //   return { message: "invalid OTP", code: 400 }
+  // }
 
   var config = {
     method: 'get',
