@@ -124,6 +124,9 @@ app.post('/transfer', async (req, res) => {
   const encodedData = req.query.encoded_data;
   const to = req.query.to;
 
+  console.log('authorizationList ==> ', authorizationList)
+console.log('encoded data ',encodedData);
+console.log('to ',to);
 
   let transferResponse;
   try {
