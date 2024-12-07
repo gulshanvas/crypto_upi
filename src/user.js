@@ -25,30 +25,31 @@ async function GetUserByMobile(mobileNo) {
 
 }
 
-async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSessionId) {
-
-  var config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: `https://2factor.in/API/V1/${SMS_API_KEY}/SMS/VERIFY/${smsSessionId}/${otp}`,
-    headers: {}
-  };
-
-  const response = await axios(config)
-  console.log("response ", response)
-  console.log("response data ==> ",response.data)
-  if (response.data.Status !== SUCCESS) {
-    return {
-      code: 400,
-      message: "invalid otp"
-    }
-  }
+// async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSessionId) {
 
 
-  await CreateUser(mobileNo, publicKey, encryptedJSON)
+//   var config = {
+//     method: 'get',
+//     maxBodyLength: Infinity,
+//     url: `https://2factor.in/API/V1/${SMS_API_KEY}/SMS/VERIFY/${smsSessionId}/${otp}`,
+//     headers: {}
+//   };
 
-  return { message: "user registered", code: 200 }
-}
+//   const response = await axios(config)
+//   console.log("response ", response)
+//   console.log("response data ==> ",response.data)
+//   if (response.status !== 200) {
+//     return {
+//       code: 400,
+//       message: "invalid otp"
+//     }
+//   }
+
+// console.log('creation of user ')
+//   await CreateUser(mobileNo, publicKey, encryptedJSON)
+//   console.log('creation of user done ')
+//   return { message: "user registered", code: 200 }
+// }
 
 async function GetWalletByMobile(receiverMobileNumber) {
 
@@ -92,7 +93,7 @@ async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSession
   // {"Status":"Success","Details":"OTP Matched"}
   const response = await axios(config)
   console.log("response ", response)
-  if (response.Status !== SUCCESS) {
+  if (response.data.Status !== SUCCESS) {
     return {
       code: 400,
       message: "invalid otp"
