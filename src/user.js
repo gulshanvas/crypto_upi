@@ -1,5 +1,5 @@
 const { SUCCESS } = require("../constants");
-const { GetUser, CreateUser } = require("../db/db");
+const { GetUser, CreateUser, UpdateSessionId } = require("../db/db");
 
 const SMS_API_KEY = process.env.SMS_API_KEY;
 
@@ -129,9 +129,45 @@ async function SendOTP(mobileNumber) {
 
 }
 
+async function Login(mobileNo, otp, smsSessionId) {
+
+  var config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: `https://2factor.in/API/V1/${SMS_API_KEY}/SMS/VERIFY/${smsSessionId}/${otp}`,
+    headers: {}
+  };
+
+  // {"Status":"Success","Details":"OTP Matched"}
+  const response = await axios(config)
+  console.log("response ", response)
+  if (response.data.Status !== SUCCESS) {
+    return {
+      code: 400,
+      message: "invalid otp"
+    }
+  }
+
+  // temporary session id
+  const sessionId = uuidv4()
+
+  await UpdateSessionId(mobileNo, sessionId)
+
+  return {
+    code: 200,
+    data: {
+      sessionId: sessionId,
+      mobileNo: mobileNo
+    },
+    message: "logged in"
+  }
+
+}
+
 module.exports = {
   GetUserByMobile,
   CreateNewUser,
   SendOTP,
-  GetWalletByMobile
+  GetWalletByMobile,
+  Login
 }

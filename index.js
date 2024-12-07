@@ -107,6 +107,17 @@ app.post('/generate-otp', async (req, res) => {
 
 })
 
+app.post('/login', async (req, res) => {
+  const mobileNo = req.query.mobile_no;
+  const otp = req.query.otp;
+  const sessionId = req.query.sms_session_id;
+
+  const response = await Login(mobileNo, otp, sessionId)
+
+  res.status(response.status).json({ success: true, data: response.data })
+
+})
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
