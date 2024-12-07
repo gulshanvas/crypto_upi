@@ -132,7 +132,7 @@ app.post('/transfer', async (req, res) => {
 
   let transferResponse;
   try {
-    transferResponse = await TransferRequest(receiver, amount, signedTx);
+    transferResponse = await TransferRequest(receiver, amount, signedTx, loginSessionId);
 
     res.json({ success: true, message: "successfully transferred", data: transferResponse.receipt });
 

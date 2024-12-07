@@ -130,7 +130,7 @@ async function SendOTP(mobileNumber) {
 
 }
 
-async function TransferRequest(receiverMobileNumber, amount, signedTx) {
+async function TransferRequest(receiverMobileNumber, amount, signedTx, loginSessionId) {
 
   // const rawTxHash = await walletClient.sendRawTransaction({ serializedTransaction: signedTx })
 
@@ -192,5 +192,6 @@ module.exports = {
   CreateNewUser,
   SendOTP,
   GetWalletByMobile,
-  Login
+  Login,
+  TransferRequest
 }
