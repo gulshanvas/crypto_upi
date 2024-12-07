@@ -142,6 +142,10 @@ async function TransferRequest(authorizationList, encodedData, to ) {
 
   // TODO : add validations for receiverMogileNumber
   // console.log('signed Tx ', signedTx)
+
+
+  console.log('authorizationList ===> ', authorizationList);
+
   const receiptTx = await SendSignedRawTransaction(authorizationList, encodedData, to)
 
   console.log('receiptTx ', receiptTx)
