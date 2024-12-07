@@ -6,6 +6,8 @@ const SMS_API_KEY = process.env.SMS_API_KEY;
 var axios = require('axios');
 const { SendSignedRawTransaction } = require("./blockchain");
 
+const { v4: uuidv4 } = require('uuid');
+
 async function GetUserByMobile(mobileNo) {
   console.log('in GetUserByMobile')
   const user = await GetUser(mobileNo)
