@@ -2,7 +2,7 @@ const { GetUser, CreateUser } = require("../db/db");
 
 const SMS_API_KEY = process.env.SMS_API_KEY;
 
-var axios = require('axios').default;
+var axios = require('axios');
 
 async function GetUserByMobile(mobileNo) {
   console.log('in GetUserByMobile')
