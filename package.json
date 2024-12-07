@@ -1,0 +1,27 @@
+{
+  "name": "crypto_upi",
+  "version": "1.0.0",
+  "description": "Abstraction over public addresses using phone numbers for payments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gulshanvas/crypto_upi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gulshanvas/crypto_upi/issues"
+  },
+  "homepage": "https://github.com/gulshanvas/crypto_upi#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "json-bigint": "^1.0.0",
+    "sqlite3": "^5.1.7",
+    "viem": "^2.21.54"
+  }
+}
