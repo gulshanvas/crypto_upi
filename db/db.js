@@ -72,12 +72,6 @@ async function CreateSessionId(phoneNumber, sessionId) {
   stmt.finalize();
 }
 
-async function CreateUser(mobileNumber, publicKey, encryptedJSON) {
-  const stmt = db.prepare(`INSERT INTO users (phone_no, public_key, pk_json) VALUES (?, ?, ?)`);
-  stmt.run(mobileNumber, publicKey, encryptedJSON);
-  stmt.finalize();
-}
-
 async function UpdateSessionId(phoneNumber, sessionId) {
   const stmt = db.prepare(`INSERT INTO users (session_id) VALUES (?) where phone_no = ?`);
   stmt.run(sessionId, phoneNumber);
