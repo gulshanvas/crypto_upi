@@ -36,7 +36,8 @@ async function CreateNewUser(mobileNo, publicKey, encryptedJSON, otp, smsSession
 
   const response = await axios(config)
   console.log("response ", response)
-  if (response.Status !== SUCCESS) {
+  console.log("response data ==> ",response.data)
+  if (response.data.Status !== SUCCESS) {
     return {
       code: 400,
       message: "invalid otp"
