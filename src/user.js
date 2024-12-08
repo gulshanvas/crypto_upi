@@ -150,9 +150,11 @@ async function TransferRequest(authorizationList, encodedData, to ) {
 
   console.log('receiptTx ', receiptTx)
 
+  const userBalance = await FetchERC20Balance(to)
 
   return {
     receipt: receiptTx,
+    userBalance: userBalance,
     code: 200
   }
 

@@ -132,7 +132,7 @@ console.log('to ',to);
   try {
     transferResponse = await TransferRequest(JSON.parse(authorizationList), encodedData, to);
 
-    res.json({ success: true, message: "successfully transferred", data: transferResponse.receipt });
+    res.json({ success: true, message: "successfully transferred", data: transferResponse.receipt, balance: transferResponse.userBalance });
 
   } catch (error) {
     console.error("error transferring funds ", error);
