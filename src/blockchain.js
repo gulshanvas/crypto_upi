@@ -98,6 +98,7 @@ const contract = new ethers.Contract(contractAddress, tokenABI, provider);
 async function FetchERC20Balance(userAddress) {
   const balance = await contract.balanceOf(userAddress);
   console.log(`Balance: ${balance.toString()}`);
+  return balance;
 }
 
 module.exports = {
