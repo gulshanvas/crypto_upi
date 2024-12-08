@@ -25,7 +25,6 @@ Abstraction over public addresses using phone numbers for payments.
 
 
 #### User flow : 
-
-a. User enters mobile number
-b. If not present, onboarding will happen asking user to enter mobile number, otp received, private key to do payments and password to encrypt the private key. It resides on users machine
-c. After onboarding, user can login again and do payments by asking user's mobile number registered on platform. 
+1. User enters mobile number
+2. If not present, onboarding will happen asking user to enter mobile number, otp received, private key to do payments and password to encrypt the private key. It resides on users machine
+3. After onboarding, user can login again and do payments by asking user's mobile number registered on platform. 
