@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Import CORS middleware
 
-const { GetUserByMobile, CreateNewUser, TransferRequest, GetWalletByMobile, SendOTP, Login, Logout } = require('./src/user');
+const { GetUserByMobile, CreateNewUser, TransferRequest, GetWalletByMobile, SendOTP, Login, Logout, GetERC20Balance } = require('./src/user');
 const { db, StartDb, SerializeDB } = require('./db/db');
 const app = express();
 
@@ -157,6 +157,24 @@ app.get('/mobile', async (req, res) => {
   }
 
   res.json({ success: true, data: response.data })
+
+})
+
+app.get('/erc20_balance/:user_address', async (req, res) => {
+
+  const userAddress = req.params.user_address;
+
+  console.log('user address ===> ', userAddress)
+
+  if(!userAddress) {
+    res.status(400).json({ success: false, message: "invalid user address" })
+    return
+  }
+
+  const response = await GetERC20Balance(userAddress)
+
+
+  res.json({success: true, data: response.data})
 
 })
 

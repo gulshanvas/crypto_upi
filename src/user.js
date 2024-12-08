@@ -4,7 +4,7 @@ const { GetUser, CreateUser, UpdateSessionId } = require("../db/db");
 const SMS_API_KEY = process.env.SMS_API_KEY;
 
 var axios = require('axios');
-const { SendSignedRawTransaction } = require("./blockchain");
+const { SendSignedRawTransaction, FetchERC20Balance } = require("./blockchain");
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -221,11 +221,26 @@ async function GetWalletByMobile(receiverMobileNumber) {
 
 }
 
+async function GetERC20Balance(userAddress) {
+
+  const userBalance = await FetchERC20Balance(userAddress)
+
+  return {
+    code: 200,
+    data: {
+      address: userAddress,
+      balance: userBalance
+    }
+  }
+
+}
+
 module.exports = {
   GetUserByMobile,
   CreateNewUser,
   SendOTP,
   GetWalletByMobile,
   Login,
-  TransferRequest
+  TransferRequest,
+  GetERC20Balance
 }
